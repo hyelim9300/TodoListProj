@@ -1,4 +1,3 @@
-
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -55,31 +54,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = datas[indexPath.row].title
+        let todoItem = datas[indexPath.row]
+        
+        let attributeString = NSMutableAttributedString(string: todoItem.title)
+        if todoItem.isSwitchOn {
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        }
+        cell.textLabel?.attributedText = attributeString
         
         let switchView = UISwitch()
-        switchView.isOn = datas[indexPath.row].isSwitchOn
-        
-    
+        switchView.isOn = todoItem.isSwitchOn
         switchView.tag = indexPath.row
-        
         switchView.addTarget(self, action: #selector(todoSwitch(_:)), for: .valueChanged)
-     
+        
         cell.accessoryView = switchView
         
         return cell
-    
     }
-    
-    // TableViewCell의 스위치가 변경될 때 호출되는 메서드
+
     @objc func todoSwitch(_ sender: UISwitch) {
         datas[sender.tag].isSwitchOn = sender.isOn
-        print("Switch changed for row \(sender.tag)")
+        todoListTableViewCell.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected: \(datas[indexPath.row].title)")
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            datas.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
 }
 
