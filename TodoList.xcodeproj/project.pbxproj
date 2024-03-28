@@ -59,9 +59,9 @@
 				2ECB043C2BB515A80036813B /* AppDelegate.swift */,
 				2ECB043E2BB515A80036813B /* SceneDelegate.swift */,
 				2ECB04402BB515A80036813B /* ViewController.swift */,
+				2ECB04472BB515A90036813B /* LaunchScreen.storyboard */,
 				2ECB04422BB515A80036813B /* Main.storyboard */,
 				2ECB04452BB515A90036813B /* Assets.xcassets */,
-				2ECB04472BB515A90036813B /* LaunchScreen.storyboard */,
 				2ECB044A2BB515A90036813B /* Info.plist */,
 			);
 			path = TodoList;
