@@ -37,8 +37,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func addTodoItem(title: String) {
         let newTodo = TodoItem(title: title, isSwitchOn: false)
         datas.append(newTodo)
-        todoListTableViewCell.reloadData()
+        
+        // 테이블 뷰에 새로운 행 추가
+        let indexPath = IndexPath(row: datas.count - 1, section: 0)
+        todoListTableViewCell.insertRows(at: [indexPath], with: .automatic)
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
