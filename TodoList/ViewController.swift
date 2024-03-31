@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @objc func todoSwitch(_ sender: UISwitch) {
         datas[sender.tag].isSwitchOn = sender.isOn
-        todoListTableViewCell.reloadData()
+        todoListTableViewCell.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic) 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -91,4 +91,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
 }
-
