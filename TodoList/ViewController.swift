@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         TodoItem(title: "todo 3", isSwitchOn: false)
     ]
     
-    @IBOutlet weak var todoListTableViewCell: UITableView!
+    @IBOutlet weak var todoListTableView: UITableView!
     
     @IBAction func addTodoButton(_ sender: Any) {
         let title = "할 일 추가"
@@ -37,14 +37,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func addTodoItem(title: String) {
         let newTodo = TodoItem(title: title, isSwitchOn: false)
         datas.append(newTodo)
-        todoListTableViewCell.reloadData()
+        todoListTableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        todoListTableViewCell.dataSource = self
-        todoListTableViewCell.delegate = self
-        todoListTableViewCell.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        todoListTableView.dataSource = self
+        todoListTableView.delegate = self
+        todoListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
     
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @objc func todoSwitch(_ sender: UISwitch) {
         datas[sender.tag].isSwitchOn = sender.isOn
-        todoListTableViewCell.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic) 
+        todoListTableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
